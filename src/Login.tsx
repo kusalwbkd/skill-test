@@ -28,6 +28,7 @@ const Login = () => {
         const {data} = await response.json();
         localStorage.setItem('accessToken', data.accessToken)
         console.log('Success:', data);
+        window.location.reload()
       } catch (error) {
         console.error('Error:', error);
       }

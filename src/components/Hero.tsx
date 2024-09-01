@@ -1,17 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import PropertyCard from './PropertyCard';
-import { Property } from '@/type';
-import Login from '@/Login';
+import Login from "@/Login";
+import { Property } from "@/type";
+import { useEffect, useState } from "react";
+import PropertyCard from "./PropertyCard";
 
 const Hero = () => {
+ 
   const [property, setProperty] = useState<Property[] | undefined>(undefined);
   const [user, setUser] = useState<boolean>(false);
- 
+  const [loading, setLoading] = useState<boolean>(true);
+
   const accessToken = localStorage.getItem('accessToken') || '';
   const url = 'https://skill-test.similater.website/api/v1/property/list';
   const userUrl = 'https://skill-test.similater.website/api/v1/user/check';
 
   const checkUser = async () => {
+    if (!accessToken) {
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch(userUrl, {
         method: 'GET',
@@ -25,9 +32,12 @@ const Hero = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-    setUser(true);
+      setUser(true);
     } catch (error) {
       console.error('Error:', error);
+      setUser(false);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -64,6 +74,10 @@ const Hero = () => {
     }
   }, [user]);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       {user ? (
@@ -80,4 +94,5 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+
+export default Hero
