@@ -1,0 +1,10 @@
+{/* <div className='flex justify-between'>
+<div>
+            <p className='font-sans font-semibold text-[18px] leading-[21.78px] text-black'>Property 1</p>
+            <p className='font-sans font-normal text-[14px] leading-[16.94px] text-[#44505c]'>Property code:sss</p>
+            </div>
+       <div>
+       <p className=' font-sans font-semibold text-[18px] leading-[21.78px] text-[#8c18ff]'>1000</p>
+
+       </div>
+</div> */}
